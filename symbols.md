@@ -34,7 +34,7 @@ WinDbg will use the first directory we specified above as a local cache for symb
 
 ### Symbols Command(s)
 
-- **.symfix (Set Symbol Store Path)**
+### **.symfix (Set Symbol Store Path)**
 
 > .hh .symfix
 
@@ -42,9 +42,8 @@ The .symfix command automatically sets the symbol path to point to the Microsoft
 
 > .symfix[+] [LocalSymbolCache]
 
-----
 
-- **.symopt (Set Symbol Options)**
+### **.symopt (Set Symbol Options)**
 
 > .hh .symopt
 
@@ -66,9 +65,7 @@ Symbol options are 0x30337:
 
 ```
 
-----
-
-- **.sympath (Set Symbol Path)**
+### **.sympath (Set Symbol Path)**
 
 > .hh sympath
 
@@ -82,7 +79,51 @@ The .sympath command sets or alters the symbol path. The symbol path specifies l
 .sympath+ C:Windows\Symbols
 ```
 
-----
+### x (Examine Symbols)
+
+The x command displays the symbols in all contexts that match the specified pattern.
+
+> x [Options] Module!Symbol 
+> x [Options] *
+
+```
+0:000> x USER32!*messagebox*
+00000000`775013b8 USER32!MessageBoxTimeoutW (<no parameter info>)
+00000000`77501094 USER32!ServiceMessageBox (<no parameter info>)
+00000000`77501f6c USER32!SoftModalMessageBox (<no parameter info>)
+00000000`77503cd0 USER32!LogMessageBox (<no parameter info>)
+00000000`7750148c USER32!MessageBoxTimeoutA (<no parameter info>)
+00000000`77501668 USER32!MessageBoxIndirectA (<no parameter info>)
+00000000`77501874 USER32!MessageBoxIndirectW (<no parameter info>)
+00000000`775018f8 USER32!MessageBoxWorker (<no parameter info>)
+00000000`77501394 USER32!MessageBoxExW (<no parameter info>)
+00000000`77501370 USER32!MessageBoxExA (<no parameter info>)
+00000000`77501314 USER32!MessageBoxW (<no parameter info>)
+00000000`775012b8 USER32!MessageBoxA (<no parameter info>)
+```
+
+### ld (Load Symbols)
+
+The ld command loads symbols for the specified module and updates all module information.
+
+> ld ModuleName [/f FileName]
+
+```
+0:000> ld *
+Symbols already loaded for cmd
+Symbols already loaded for kernel32
+Symbols already loaded for USER32
+Symbols already loaded for ntdll
+Symbols already loaded for WINBRAND
+Symbols already loaded for KERNELBASE
+Symbols already loaded for LPK
+Symbols already loaded for USP10
+Symbols already loaded for msvcrt
+Symbols already loaded for GDI32
+0:000> ld kernel32
+Symbols already loaded for kernel32
+```
+
 
 ### Example
 
