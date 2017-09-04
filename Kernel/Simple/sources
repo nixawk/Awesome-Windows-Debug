@@ -1,0 +1,3 @@
+TARGETNAME=hellodriver
+TARGETTYPE=DRIVER
+SOURCES=hellodriver.c
