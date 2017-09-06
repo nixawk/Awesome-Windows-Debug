@@ -49,10 +49,9 @@ NTSTATUS DispatchRead(PDEVICE_OBJECT pDeviceObject, PIRP pIrp)
 
 NTSTATUS DispatchWrite(PDEVICE_OBJECT pDeviceObject, PIRP pIrp)
 {
-    PVOID pBuffer = NULL;
     PSTACK pStack = IoGetCurrentIrpStackLocation(pIrp);
     
-    pBuffer = ExAllocatePoolWithTag(PagedPool, pStack->Parameters.Write.Length, 'WTAG');
+    PVOID pBuffer = ExAllocatePoolWithTag(PagedPool, pStack->Parameters.Write.Length, 'WTAG');
     if (pBuffer == NULL)
     {
         pIrp->IoStatus.Status = STATUS_INSUFFICIENT_RESOURCES;
