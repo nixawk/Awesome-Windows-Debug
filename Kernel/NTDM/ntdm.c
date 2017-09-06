@@ -43,13 +43,12 @@ typedef PIO_STACK_LOCATION PSTACK;
  **********************************************************************/
 NTSTATUS DispatchUnSupportedFunction(PDEVICE_OBJECT pDeviceObject, PIRP pIrp)
 {
-    // pIrp->IoStatus.Status = STATUS_SUCCESS;
-    // pIrp->IoStatus.Information = 0;
-
-    // IoCompleteRequest(pIrp, IO_NO_INCREMENT);
-
     NTSTATUS NtStatus = STATUS_SUCCESS;
     DbgPrint("UnSupportedFunction Called  \r\n");
+
+    pIrp->IoStatus.Status = STATUS_SUCCESS;
+    pIrp->IoStatus.Information = 0;
+    IoCompleteRequest(pIrp, IO_NO_INCREMENT);
 
     return NtStatus;
 }
@@ -64,13 +63,12 @@ NTSTATUS DispatchUnSupportedFunction(PDEVICE_OBJECT pDeviceObject, PIRP pIrp)
  **********************************************************************/
 NTSTATUS DispatchCreate(PDEVICE_OBJECT pDeviceObject, PIRP pIrp)
 {
-    // pIrp->IoStatus.Status = STATUS_SUCCESS;
-    // pIrp->IoStatus.Information = 0;
-
-    // IoCompleteRequest(pIrp, IO_NO_INCREMENT);
-
     NTSTATUS NtStatus = STATUS_SUCCESS;
     DbgPrint("DispatchCreate Called  \r\n");
+
+    pIrp->IoStatus.Status = STATUS_SUCCESS;
+    pIrp->IoStatus.Information = 0;
+    IoCompleteRequest(pIrp, IO_NO_INCREMENT);
 
     return NtStatus;
 }
@@ -97,10 +95,9 @@ NTSTATUS DispatchRead(PDEVICE_OBJECT pDeviceObject, PIRP pIrp)
 
     RtlCopyMemory(pIrp->AssociatedIrp.SystemBuffer, src.Buffer, rLength);
 
-    // pIrp->IoStatus.Status = STATUS_SUCCESS;
-    // pIrp->IoStatus.Information = 0;
-
-    // IoCompleteRequest(pIrp, IO_NO_INCREMENT);
+    pIrp->IoStatus.Status = STATUS_SUCCESS;
+    pIrp->IoStatus.Information = 0;
+    IoCompleteRequest(pIrp, IO_NO_INCREMENT);
 
     return NtStatus;
 }
@@ -139,9 +136,9 @@ NTSTATUS DispatchWriteBufferedIO(PDEVICE_OBJECT pDeviceObject, PIRP pIrp)
     ExFreePool(pBuffer);
     pBuffer = NULL;
 
-    // pIrp->IoStatus.Status = STATUS_SUCCESS;
-    // pIrp->IoStatus.Information = 0;
-    // IoCompleteRequest(pIrp, IO_NO_INCREMENT);
+    pIrp->IoStatus.Status = STATUS_SUCCESS;
+    pIrp->IoStatus.Information = 0;
+    IoCompleteRequest(pIrp, IO_NO_INCREMENT);
 
     return NtStatus;
 }
@@ -181,9 +178,9 @@ NTSTATUS DispatchIoControl(PDEVICE_OBJECT pDeviceObject, PIRP pIrp)
             DbgPrint("DispatchIoControl\r\n");
     }
 
-    // pIrp->IoStatus.Status = STATUS_SUCCESS;
-    // pIrp->IoStatus.Information = 0;
-    // IoCompleteRequest(pIrp, IO_NO_INCREMENT);
+    pIrp->IoStatus.Status = STATUS_SUCCESS;
+    pIrp->IoStatus.Information = 0;
+    IoCompleteRequest(pIrp, IO_NO_INCREMENT);
 
     return NtStatus;
 }
@@ -202,9 +199,9 @@ NTSTATUS DispatchClose(PDEVICE_OBJECT pDeviceObject, PIRP pIrp)
 
     DbgPrint("DispatchClose called \r\n");
 
-    // pIrp->IoStatus.Status = STATUS_SUCCESS;
-    // pIrp->IoStatus.Information = 0;
-    // IoCompleteRequest(pIrp, IO_NO_INCREMENT);
+    pIrp->IoStatus.Status = STATUS_SUCCESS;
+    pIrp->IoStatus.Information = 0;
+    IoCompleteRequest(pIrp, IO_NO_INCREMENT);
 
     return NtStatus;
 }
@@ -223,9 +220,9 @@ NTSTATUS DispatchClean(PDEVICE_OBJECT pDeviceObject, PIRP pIrp)
 
     DbgPrint("DispatchClean called \r\n");
 
-    // pIrp->IoStatus.Status = STATUS_SUCCESS;
-    // pIrp->IoStatus.Information = 0;
-    // IoCompleteRequest(pIrp, IO_NO_INCREMENT);
+    pIrp->IoStatus.Status = STATUS_SUCCESS;
+    pIrp->IoStatus.Information = 0;
+    IoCompleteRequest(pIrp, IO_NO_INCREMENT);
 
     return NtStatus;
 }
