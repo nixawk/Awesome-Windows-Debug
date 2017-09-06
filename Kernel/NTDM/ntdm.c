@@ -9,7 +9,7 @@ typedef PIO_STACK_LOCATION PSTACK;
 #define IOCTL_PRT IOCONTROL_CODE(1)
 #define IOCTL_BYE IOCONTROL_CODE(2)
 
-NTSTATUS DispatchCommon(PDEVICE_OBJECT pDriverObject, PIRP pIrp)
+NTSTATUS DispatchCommon(PDEVICE_OBJECT pDeviceObject, PIRP pIrp)
 {
     pIrp->IoStatus.Status = STATUS_SUCCESS;
     pIrp->IoStatus.Information = 0;
@@ -18,7 +18,7 @@ NTSTATUS DispatchCommon(PDEVICE_OBJECT pDriverObject, PIRP pIrp)
     return STATUS_SUCCESS;
 }
 
-NTSTATUS DispatchCreate(PDEVICE_OBJECT pDriverObject, PIRP pIrp)
+NTSTATUS DispatchCreate(PDEVICE_OBJECT pDeviceObject, PIRP pIrp)
 {
     DbgPrint("DispatchCreate\r\n");
 
@@ -29,7 +29,7 @@ NTSTATUS DispatchCreate(PDEVICE_OBJECT pDriverObject, PIRP pIrp)
     return STATUS_SUCCESS;
 }
 
-NTSTATUS DispatchRead(PDEVICE_OBJECT pDriverObject, PIRP pIrp)
+NTSTATUS DispatchRead(PDEVICE_OBJECT pDeviceObject, PIRP pIrp)
 {
     UNICODE_STRING src = RTL_CONSTANT_STRING(L"HELLO DispatchRead");
 
@@ -47,7 +47,7 @@ NTSTATUS DispatchRead(PDEVICE_OBJECT pDriverObject, PIRP pIrp)
     return STATUS_SUCCESS;
 }
 
-NTSTATUS DispatchWrite(PDEVICE_OBJECT pDriverObject, PIRP pIrp)
+NTSTATUS DispatchWrite(PDEVICE_OBJECT pDeviceObject, PIRP pIrp)
 {
     PVOID pBuffer = NULL;
     PSTACK pStack = IoGetCurrentIrpStackLocation(pIrp);
@@ -76,7 +76,7 @@ NTSTATUS DispatchWrite(PDEVICE_OBJECT pDriverObject, PIRP pIrp)
     return STATUS_SUCCESS;
 }
 
-NTSTATUS DispatchIoControl(PDEVICE_OBJECT pDriverObject, PIRP pIrp)
+NTSTATUS DispatchIoControl(PDEVICE_OBJECT pDeviceObject, PIRP pIrp)
 {
     PSTACK pStack = IoGetCurrentIrpStackLocation(pIrp);
 
@@ -106,7 +106,7 @@ NTSTATUS DispatchIoControl(PDEVICE_OBJECT pDriverObject, PIRP pIrp)
     return STATUS_SUCCESS;
 }
 
-NTSTATUS DispatchClose(PDEVICE_OBJECT pDriverObject, PIRP pIrp)
+NTSTATUS DispatchClose(PDEVICE_OBJECT pDeviceObject, PIRP pIrp)
 {
     DbgPrint("DispatchClose\r\n");
 
@@ -117,7 +117,7 @@ NTSTATUS DispatchClose(PDEVICE_OBJECT pDriverObject, PIRP pIrp)
     return STATUS_SUCCESS;
 }
 
-NTSTATUS DispatchClean(PDEVICE_OBJECT pDriverObject, PIRP pIrp)
+NTSTATUS DispatchClean(PDEVICE_OBJECT pDeviceObject, PIRP pIrp)
 {
     DbgPrint("DispatchClean\r\n");
 
