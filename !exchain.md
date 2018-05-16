@@ -40,6 +40,9 @@ Invalid exception stack at ffffffff
 TEB ----> TIB ----> _EXCEPTION_REGISTRATION_RECORD
 ```
 
+![](TIB.png)
+
+
 - **TEB (Thread Environment Block)**
 
 ```
@@ -201,3 +204,4 @@ TEB at 7ffde000
 - https://doxygen.reactos.org/d5/db1/dll_2win32_2dbghelp_2compat_8h_source.html
 - https://msdn.microsoft.com/en-us/library/ms680657(v=vs.85).aspx
 - https://www.nirsoft.net/kernel_struct/vista/TEB.html
+- https://en.wikipedia.org/wiki/Win32_Thread_Information_Block
