@@ -86,7 +86,16 @@ Displays the AVX YMM registers. This option is equivalent to M 0x200.
 
 Displays the AVX YMM integer registers. This option is equivalent to M 0x400.
 
+Display eflags bits.  (of, df, if, tf, sf, zf, af, pf, cf, vip, vif)
 
+```
+0:001> r zf
+zf=1
+0:001> r sf
+sf=0
+0:001> r cf
+cf=0
+```
 
 
 ### Edit Register(s)
