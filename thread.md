@@ -1,6 +1,94 @@
 
 ## threads commands
 
+```
+0:001> ~
+   0  Id: 7a0.5ac Suspend: 1 Teb: 7ffdf000 Unfrozen
+.  1  Id: 7a0.82c Suspend: 1 Teb: 7ffde000 Unfrozen
+
+0:001> ~*
+   0  Id: 7a0.5ac Suspend: 1 Teb: 7ffdf000 Unfrozen
+      Start: notepad!WinMainCRTStartup (00e131c9) 
+      Priority: 0  Priority class: 32  Affinity: 1
+.  1  Id: 7a0.82c Suspend: 1 Teb: 7ffde000 Unfrozen
+      Start: ntdll!DbgUiRemoteBreakin (76fcec3b) 
+      Priority: 0  Priority class: 32  Affinity: 1
+
+0:001> ~.
+.  1  Id: 7a0.82c Suspend: 1 Teb: 7ffde000 Unfrozen
+      Start: ntdll!DbgUiRemoteBreakin (76fcec3b) 
+      Priority: 0  Priority class: 32  Affinity: 1
+```
+
+```
+0:001> ~f
+0:001> ~
+   0  Id: 7a0.5ac Suspend: 1 Teb: 7ffdf000 Unfrozen
+.  1  Id: 7a0.82c Suspend: 1 Teb: 7ffde000 Frozen  
+0:001> ~u
+0:001> ~
+   0  Id: 7a0.5ac Suspend: 1 Teb: 7ffdf000 Unfrozen
+.  1  Id: 7a0.82c Suspend: 1 Teb: 7ffde000 Unfrozen
+```
+
+```
+0:001> ~0s
+eax=000011b9 ebx=00cc02f5 ecx=000df8dc edx=000dfae8 esi=000dfb20 edi=770bcdb8
+eip=76f76bb4 esp=000dfae0 ebp=000dfafc iopl=0         nv up ei pl zr na pe nc
+cs=001b  ss=0023  ds=0023  es=0023  fs=003b  gs=0000             efl=00000246
+ntdll!KiFastSystemCallRet:
+76f76bb4 c3              ret
+0:000> ~
+.  0  Id: 7a0.5ac Suspend: 1 Teb: 7ffdf000 Unfrozen
+#  1  Id: 7a0.82c Suspend: 1 Teb: 7ffde000 Unfrozen
+```
+
+```
+0:001> !tls
+Usage:
+tls <slot> [teb]
+  slot:  -1 to dump all allocated slots
+         {0-0n1088} to dump specific slot
+  teb:   <empty> for current thread
+         0 for all threads in this process
+         <teb address> (not threadid) to dump for specific thread.
+0:001> !tls -1
+TLS slots on thread: 7a0.82c
+0x0000 : 00000000
+0x0001 : 00000000
+0x0002 : 00000000
+0x0003 : 00000000
+0x0004 : 00000000
+0x0005 : 00000000
+0x0006 : 00000000
+0x0007 : 00000000
+0x0008 : 00000000
+0x0009 : 00000000
+0x000a : 00000000
+0x000b : 00000000
+0x000c : 00000000
+0x000d : 00000000
+0x000e : 00000000
+0x000f : 00000000
+0x0010 : 00000000
+0x0011 : 00000000
+0x0012 : 00000000
+0x0013 : 00000000
+0x0014 : 00000000
+0x0015 : 00000000
+0x0016 : 00000000
+0x0017 : 00000000
+0x0018 : 00000000
+0x0040 : 000007b4
+```
+
+```
+0:001> .ttime
+Created: Thu May 17 20:59:47.245 2018 (UTC - 7:00)
+Kernel:  0 days 0:00:00.000
+User:    0 days 0:00:00.000
+```
+
 <table class="CmdGroup CmdGroup_ExampleAttached">
 <tbody>
 	<tr><th class="CmdGroup" colspan="3">12) Thread related information</th></tr>
