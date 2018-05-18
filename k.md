@@ -185,3 +185,60 @@ WordCount
 02 00000000`0015f400 00000000`776fc32e ntdll! ?? ::FNODOBFM::`string'+0x29220
 03 00000000`0015f470 00000000`00000000 ntdll!LdrInitializeThunk+0xe
 ```
+
+----
+
+## A demo program
+
+```
+#include "stdafx.h"
+#include <windows.h>
+
+void WindbgStackBacktraceBBBB()
+{
+  printf("I'm BBBB\n");
+}
+
+void WindbgStackBacktraceAAAA()
+{
+  printf("I'm AAAA\n");
+
+  WindbgStackBacktraceBBBB();
+}
+
+int main(int argc, char* argv[])
+{
+  WindbgStackBacktraceAAAA();
+
+  return 0;
+}
+
+```
+
+```
+0:000> x WindbgStackBacktrace!*Windbg*
+010813a0 WindbgStackBacktrace!WindbgStackBacktraceBBBB (void)
+01081400 WindbgStackBacktrace!WindbgStackBacktraceAAAA (void)
+0:000> bp WindbgStackBacktrace!WindbgStackBacktraceBBBB
+0:000> g
+Breakpoint 0 hit
+eax=00000009 ebx=7ffdc000 ecx=b257366b edx=53ace4b8 esi=0022fd0c edi=0022fdd8
+eip=010813a0 esp=0022fd08 ebp=0022fdd8 iopl=0         nv up ei pl zr na pe nc
+cs=001b  ss=0023  ds=0023  es=0023  fs=003b  gs=0000             efl=00000246
+WindbgStackBacktrace!WindbgStackBacktraceBBBB:
+010813a0 55              push    ebp
+0:000> kv
+ChildEBP RetAddr  Args to Child              
+0022fd04 0108143a 0022feac 00000000 7ffdc000 WindbgStackBacktrace!WindbgStackBacktraceBBBB (FPO: [Non-Fpo]) (CONV: cdecl) [c:\users\debug\desktop\src\windbgstackbacktrace\windbgstackbacktrace\windbgstackbacktrace.cpp @ 8]
+0022fdd8 01081493 00000000 00000000 7ffdc000 WindbgStackBacktrace!WindbgStackBacktraceAAAA+0x3a (FPO: [Non-Fpo]) (CONV: cdecl) [c:\users\debug\desktop\src\windbgstackbacktrace\windbgstackbacktrace\windbgstackbacktrace.cpp @ 17]
+0022feac 01081a1f 00000001 00561480 00561b00 WindbgStackBacktrace!main+0x23 (FPO: [Non-Fpo]) (CONV: cdecl) [c:\users\debug\desktop\src\windbgstackbacktrace\windbgstackbacktrace\windbgstackbacktrace.cpp @ 23]
+0022fefc 0108184f 0022ff10 7529efac 7ffdc000 WindbgStackBacktrace!__tmainCRTStartup+0x1bf (FPO: [Non-Fpo]) (CONV: cdecl) [f:\dd\vctools\crt_bld\self_x86\crt\src\crtexe.c @ 555]
+0022ff04 7529efac 7ffdc000 0022ff50 76f93628 WindbgStackBacktrace!mainCRTStartup+0xf (FPO: [Non-Fpo]) (CONV: cdecl) [f:\dd\vctools\crt_bld\self_x86\crt\src\crtexe.c @ 371]
+0022ff10 76f93628 7ffdc000 75bc486d 00000000 kernel32!BaseThreadInitThunk+0xe (FPO: [Non-Fpo])
+0022ff50 76f935fb 0108110e 7ffdc000 00000000 ntdll!__RtlUserThreadStart+0x70 (FPO: [Non-Fpo])
+0022ff68 00000000 0108110e 7ffdc000 00000000 ntdll!_RtlUserThreadStart+0x1b (FPO: [Non-Fpo])
+```
+
+## References
+
+# https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/k--kb--kc--kd--kp--kp--kv--display-stack-backtrace-
